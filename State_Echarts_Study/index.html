@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>疫情数据可视化</title>
+    <link rel="stylesheet" href="css/index.css">
+    </link>
+</head>
+
+<body>
+        <!-- 引入flexible.js布局实现窗口自适应：分成24份，1920一份就是80px -->
+    <script src="js/flexible.js"></script>
+    <header>
+        <h1>疫情数据可视化面板</h1>
+        <div class="showTime">
+            <script>
+                var t = null;
+                t = setTimeout(time, 1000)
+
+                function time() {
+                    clearTimeout(t)
+                    dt = new Date();
+                    // console.log(dt)
+                    var y = dt.getFullYear();
+                    var m = dt.getMonth() + 1;
+                    var d = dt.getDate();
+                    var h = dt.getHours();
+                    var min = dt.getMinutes()
+                    var s = dt.getSeconds()
+                    document.querySelector('.showTime').innerHTML = '当前时间为:' + y + '年' + m + '月' + d + '日' + h + '时' +
+                        min + '分' + s + '秒';
+                    t = setTimeout(time, 1000)
+                }
+                time()
+            </script>
+        </div>
+    </header>
+    <section class="mainbox">
+        <!-- 中间1 -->
+        <div class="column">
+            <div class="panel bar">
+                <h2>疫情人数分布1</h2>
+                <div class="chart"></div>
+                <div class="panel-footer"></div>
+            </div>
+            <div class="panel line">
+                <h2>疫情人数分布2</h2>
+                <div class="chart">chart</div>
+                <div class="panel-footer"></div>
+            </div>
+            <div class="panel pie">
+                <h2>疫情人数分布3</h2>
+                <div class="chart">chart</div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+        <!-- 中间2 -->
+        <div class="column">
+            <div class="no">
+                <div class="no-hd">
+                    <ul>
+                        <li>125811</li>
+                        <li>100000</li>
+                    </ul>
+                </div>
+                <div class="no-bd">
+                    <ul>
+                        <li>今日新增人数</li>
+                        <li>目前确诊总数</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 地图模块 -->
+            <div class="map">
+                <!-- map-earth:基础球体 -->
+                <div class="map-earth"></div>
+                <!-- 旋转1 -->
+                <div class="map-reverse1"></div>
+                <!-- 旋转2 -->
+                <div class="map-reverse2"></div>
+            </div>
+        </div>
+        <!-- 中间3 -->
+        <div class="column">
+            <div class="panel bar">
+                <h2>疫情人数分布1</h2>
+                <div class="chart">chart</div>
+                <div class="panel-footer"></div>
+            </div>
+            <div class="panel bar">
+                <h2>疫情人数分布2</h2>
+                <div class="chart">chart</div>
+                <div class="panel-footer"></div>
+            </div>
+            <div class="panel bar">
+                <h2>疫情人数分布3</h2>
+                <div class="chart">chart</div>
+                <div class="panel-footer"></div>
+            </div>
+        </div>
+    </section>
+    <script src="js/echarts.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
