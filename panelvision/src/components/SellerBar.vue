@@ -23,6 +23,8 @@ export default {
     this.initChart()
     this.getData()
     window.addEventListener('resize', this.screenAdapter)
+    // 在界面姐在完成时进行适配屏幕
+    this.screenAdapter()
   },
   destroyed () {
     clearInterval(this.timerId)
@@ -169,7 +171,7 @@ export default {
       }, 3000)
     },
     screenAdapter () {
-    // console.log(this.$refs.seller_ref.offsetWidth)
+      // 获取宽度 并设置标题大小设置3.6是本次合适的值,不统一
       const titleFontSize = this.$refs.seller_ref.offsetWidth / 100 * 3.6
       // 和分辨率大小相关的配置项option
       const adapterOption = {
