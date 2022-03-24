@@ -7,4 +7,4 @@ module.exports = async (ctx, next) => {
   ctx.set("Access-Control-Allow-Methods", "OPTIONS, GET, PUT, POST, DELETE")
   // ctx.response.body='{"success":true}'
   await next()
-}
+} 
