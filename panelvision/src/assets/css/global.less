@@ -27,3 +27,55 @@ body,
   height: 100%;
   overflow: hidden;
 }
+
+// 修改了element的标题下拉选择在这里的全局样式
+.title {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  z-index: 10;
+
+  .el-select {
+    min-width: 200px;
+    width: calc(30vh);
+
+    .el-input {
+      .el-input__inner {
+        border: 0;
+        font-size: 4vh;
+        background-color: transparent;
+        color: #fff
+      }
+
+      .el-select__caret {
+        font-size: 3vh;
+      }
+    }
+
+
+    .el-scrollbar,
+    .el-select-dropdown {
+      border: 0;
+      background-color: transparent !important;
+      color: #fff !important;
+    }
+
+    .el-scrollbar__wrap,
+    .el-select-dropdown__list {
+      background-color: #0b1a37;
+      color: #fff !important;
+    }
+
+    // 鼠标选择色
+    .el-select-dropdown__item.hover,
+    .el-select-dropdown__item:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #fff;
+    }
+
+    // 去除小三角
+    .el-popper .popper__arrow {
+      display: none
+    }
+  }
+}

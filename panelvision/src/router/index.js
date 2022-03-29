@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import SellerPage from '@/view/SellerPage'
 import TrendLine from '@/components/TrendLine'
-
+import HotPie from '@/components/HotPie'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,6 +13,10 @@ const routes = [
   {
     path: '/trendpage',
     component: TrendLine
+  },
+  {
+    path: '/hotpage',
+    component: HotPie
   }
 ]
 

@@ -1,7 +1,7 @@
 <template>
   <div class="com-container">
-    <div class="com-chart" ref='trend_ref'>
-    </div>
+    {{allData}}
+    <div class="com-chart" ref="hot_ref"></div>
   </div>
 </template>
 
@@ -16,34 +16,34 @@ export default {
   mounted () {
     this.initChart()
     this.getData()
-    window.addEventListener('resize', this.screenAdapter)
-    this.screenAdapter()
   },
   methods: {
     initChart () {
-      this.chartInstance = this.$echarts.init(this.$refs.trend_ref)
+      this.chartInstance = this.$echarts.init(this.$refs.hot_ref)
       const initOption = {
 
       }
       this.chartInstance.setOption(initOption)
     },
     async getData () {
-      this.updateChart()
+      const { data: res } = await this.$http.get('hotproduct')
+      this.allData = res
+      console.log(this.allData)
+      this.updateData()
     },
-    updateChart () {
+    updateData () {
       const dataOption = {
+
       }
       this.chartInstance.setOption(dataOption)
     },
     screenAdapter () {
-      const adapterOption = {}
-      this.chartInstance.setOption(adapterOption)
-      this.chartInstance.resize()
+
     }
   }
 }
 </script>
 
-<style lang='less' scoped>
+<style>
 
 </style>

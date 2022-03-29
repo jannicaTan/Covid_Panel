@@ -1,10 +1,11 @@
 <template>
   <div class="com-container">
-    <el-select v-model="label" class="com-select">
-      <!-- <el-option :label="" :value=""></el-option> -->
-      <el-option v-for="item in selectTypes" :key="item.key" :value="item.key" :label="item.text">
-      </el-option>
-    </el-select>
+    <div class="title">
+      <el-select v-model="dataType" placeholder="请选择" :popper-append-to-body="false" >
+        <el-option v-for="item in options" :key="item.key" :label="item.text" :value="item.key">
+        </el-option>
+      </el-select>
+    </div>
     <div class="com-chart" ref='trend_ref'>
     </div>
   </div>
@@ -16,26 +17,18 @@ export default {
     return {
       chartInstance: null,
       allData: null,
-      dataType: 'map'
+      dataType: 'map',
+      options: null
     }
   },
-  computed: {
-    selectTypes () {
-      if (!this.allData || !this.allData.type) {
-        return []
-      } else {
-        return this.allData.type.filter(item => {
-          return item.key !== this.dataType
-        })
-      }
+  watch: {
+    dataType (val, oldval) {
+      // console.log('new:' + val)
+      // console.log('old:' + oldval)
+      // console.log(this.dataType)
+      // 这里值修改后要进行重新update呀！！
+      this.updateChart()
     }
-    // title () {
-    //   if (!this.allData) {
-    //     return ''
-    //   } else {
-    //     return this.allData[this.dataType].title
-    //   }
-    // }
   },
   mounted () {
     this.initChart()
@@ -67,7 +60,8 @@ export default {
       // 1.获取数据
       const { data: res } = await this.$http.get('trend')
       this.allData = res
-      console.log(this.allData)
+      this.options = res.type
+      console.log(this.allData.type)
       this.updateChart()
     },
     updateChart () {
@@ -89,7 +83,9 @@ export default {
       ]
       // 2.处理x/y轴(series)对应数据
       const timeArrs = this.allData.common.month
-      const valueArrs = this.allData.map.data
+      console.log(this.allData[this.dataType].data)
+      // const valueArrs = this.allData.map.data
+      const valueArrs = this.allData[this.dataType].data
       const seriesArr = valueArrs.map((item, index) => {
         return {
           type: 'line', // 折线图
@@ -128,6 +124,7 @@ export default {
         }
       }
       this.chartInstance.setOption(dataOption)
+      // console.log(this.allData)
     },
     screenAdapter () {
       const adapterOption = {}
@@ -139,7 +136,4 @@ export default {
 </script>
 
 <style lang='less' scoped>
-.com-select{
-  height: 200px;
-}
 </style>
