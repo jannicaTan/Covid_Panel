@@ -4,6 +4,7 @@ import SellerPage from '@/view/SellerPage'
 import TrendLine from '@/components/TrendLine'
 import HotPie from '@/components/HotPie'
 import StockPie from '@/components/StockPie'
+import RankLine from '@/components/RankLine'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/stockpage',
     component: StockPie
+  },
+  {
+    path: '/rankpage',
+    component: RankLine
   }
 ]
 
