@@ -5,6 +5,7 @@ import TrendLine from '@/components/TrendLine'
 import HotPie from '@/components/HotPie'
 import StockPie from '@/components/StockPie'
 import RankLine from '@/components/RankLine'
+import MapChina from '@/components/MapChina'
 Vue.use(VueRouter)
 
 const routes = [
@@ -27,6 +28,10 @@ const routes = [
   {
     path: '/rankpage',
     component: RankLine
+  },
+  {
+    path: '/mappage',
+    component: MapChina
   }
 ]
 

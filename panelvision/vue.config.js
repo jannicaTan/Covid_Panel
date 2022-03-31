@@ -9,6 +9,8 @@ module.exports = {
   lintOnSave: false,
   devServer: {
     host: 'localhost',
+    // host: '0.0.0.0',
+    // useLocalIp: true,
     port: 8999, // 端口号的配置
     open: true // 自动打开浏览器
   }
