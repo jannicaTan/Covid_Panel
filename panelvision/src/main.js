@@ -19,7 +19,6 @@ Vue.use(ElementUI)
 // 将全局的echarts对象挂载到Vue的原型对象上
 // 别的组件中使用的话就直接用：this.$echarts
 Vue.prototype.$echarts = window.echarts
-
 new Vue({
   router,
   store,
