@@ -21,20 +21,33 @@ export default {
       options: null
     }
   },
+  // created中注册回调函数
+  created () {
+    this.$socket.registerCallBack('trendData', this.getData)
+  },
   watch: {
     dataType (val, oldval) {
-      // console.log('new:' + val)
-      // console.log('old:' + oldval)
-      // console.log(this.dataType)
       // 这里值修改后要进行重新update呀！！
       this.updateChart()
     }
   },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData()
+    // 用socket发送数据给服务器
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'trendData',
+      chartName: 'trend',
+      value: ''
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.screenAdapter)
+    // 在组件销毁的时候, 进行回调函数的取消
+    this.$socket.unRegisterCallBack('trendData')
   },
   methods: {
     initChart () {
