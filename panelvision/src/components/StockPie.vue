@@ -32,7 +32,8 @@ export default {
     initChart () {
       this.chartInstance = this.$echarts.init(this.$refs.stork_ref, 'chalk')
       const initChart = {
-        title: { text: '▎ 库存销售量', left: 20, top: 20 }
+        title: { text: '▎ 库存销售量', left: 20, top: 20 },
+        backgroundColor: ''
       }
       this.chartInstance.setOption(initChart)
     },

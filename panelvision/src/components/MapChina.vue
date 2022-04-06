@@ -30,6 +30,7 @@ export default {
       this.$echarts.registerMap('china', mapData)
       const initOption = {
         title: { text: '▎ 商家分布', left: 20, top: 20 },
+        backgroundColor: '', // 设置无背景色
         // 地图效果
         geo: {
           type: 'map',

@@ -4,11 +4,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 /* 声明字体*/
 @font-face {
     font-family: electronicFont;
     src: url(../font/DS-DIGIT.TTF);
-  }
+}
+
 li {
     list-style: none;
 }
@@ -172,6 +174,7 @@ header {
 
         ul {
             display: flex;
+
             li {
                 position: relative;
                 flex: 1;
@@ -180,6 +183,7 @@ header {
                 color: #ffeb7b;
                 text-align: center;
                 font-family: "electronicFont";
+
                 &:nth-child(1)::after {
                     content: "";
                     position: absolute;
@@ -192,73 +196,83 @@ header {
             }
         }
     }
-    .no-bd{
+
+    .no-bd {
         ul {
             display: flex;
+
             li {
-              flex: 1;
-              text-align: center;
-              color: rgba(255, 255, 255, 0.7);
-              font-size: 0.225rem;
-              height: 0.5rem;
-              line-height: 0.5rem;
-              padding-top: 0.125rem;
+                flex: 1;
+                text-align: center;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 0.225rem;
+                height: 0.5rem;
+                line-height: 0.5rem;
+                padding-top: 0.125rem;
             }
-          }
+        }
     }
 }
-.map{
+
+.map {
     position: relative;
     height: 10.125rem;
-    .map-earth{
+
+    .map-earth {
         position: absolute;
         width: 6.475rem;
         height: 6.475rem;
-        top:50%;
-        left:50%;
-        transform: translate(-50%,-50%);
-        background: url(../images/map.png);
-        opacity: 0.3;//透明度
-        background-size: 100%;//保证可以缩放
-    }
-    .map-reverse1{
-        position: absolute;
-        top:50%;
+        top: 50%;
         left: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
+        background: url(../images/map.png);
+        opacity: 0.3; //透明度
+        background-size: 100%; //保证可以缩放
+    }
+
+    .map-reverse1 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 8.0375rem;
         height: 8.0375rem;
         background: url(../images/lbx.png);
         background-size: 100% 100%;
-        animation: reverse1 15s linear infinite; 
+        animation: reverse1 15s linear infinite;
     }
-    .map-reverse2{
+
+    .map-reverse2 {
         position: absolute;
-        top:50%;
+        top: 50%;
         left: 50%;
         width: 7.075rem;
         height: 7.075rem;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         background: url(../images/jt.png);
         background-size: 100% 100%;
-        animation: reverse2 10s linear infinite; 
+        animation: reverse2 10s linear infinite;
     }
+
     @keyframes reverse1 {
-        from{
-            transform: translate(-50%,-50%) rotate(0deg);
+        from {
+            transform: translate(-50%, -50%) rotate(0deg);
         }
-        to{
-            transform: translate(-50%,-50%) rotate(360deg);
+
+        to {
+            transform: translate(-50%, -50%) rotate(360deg);
         }
-        
+
     }
+
     @keyframes reverse2 {
-        from{
-            transform: translate(-50%,-50%) rotate(0deg);
+        from {
+            transform: translate(-50%, -50%) rotate(0deg);
         }
-        to{
-            transform: translate(-50%,-50%) rotate(-360deg);
+
+        to {
+            transform: translate(-50%, -50%) rotate(-360deg);
         }
-        
+
     }
 }

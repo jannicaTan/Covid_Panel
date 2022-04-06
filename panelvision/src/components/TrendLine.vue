@@ -65,7 +65,8 @@ export default {
         legend: {
           top: '15%',
           left: 20
-        }
+        },
+        backgroundColor: '' // 设置无背景色
       }
       this.chartInstance.setOption(initOption)
     },

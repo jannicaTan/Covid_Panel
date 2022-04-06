@@ -35,7 +35,7 @@ export default {
   },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData()
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
@@ -68,7 +68,8 @@ export default {
             }
           }
         }
-        ]
+        ],
+        backgroundColor: '' // 设置无背景色
       }
       this.chartInstance.setOption(initOption)
     },

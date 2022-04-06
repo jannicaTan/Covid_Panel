@@ -51,6 +51,7 @@ export default {
             color: '#fff'
           }
         },
+        backgroundColor: '', // 设置无背景色
         // 图表位置
         grid: {
           top: '20%',
@@ -153,6 +154,7 @@ export default {
             data: sellerValues
           }
         ]
+
       }
       this.chartInstance.setOption(dataOption)
     },

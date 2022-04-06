@@ -34,7 +34,8 @@ export default {
         series: [{ type: 'bar' }],
         title: { text: '▎ 地区销售排行', left: 20, top: 20 },
         grid: { top: '30%', left: '5%', right: '5%', bottom: '10%', containLabel: true },
-        tooltip: { show: true }
+        tooltip: { show: true },
+        backgroundColor: '' // 设置无背景色
       }
       this.chartInstance.setOption(initOption)
       this.chartInstance.on('mouseover', () => { clearInterval(this.timerId) })
