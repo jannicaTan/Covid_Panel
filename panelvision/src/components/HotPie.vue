@@ -29,13 +29,13 @@ export default {
     },
     comStyle () {
       return {
-        fontSize: this.titleFontSize + 'px'
+        fontSize: this.titleFontSize / 1.5 + 'px'
       }
     }
   },
   mounted () {
     this.initChart()
-    // this.getData()
+    this.getData()
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
@@ -48,7 +48,9 @@ export default {
       const initOption = {
         title: {
           text: '▎ 热销商品销售金额占比统计', left: 20, top: 20
-
+        },
+        legend: {
+          y: 'bottom'
         },
         series: [{
           type: 'pie',
@@ -74,7 +76,7 @@ export default {
       this.chartInstance.setOption(initOption)
     },
     async getData () {
-      const { data: res } = await this.$http.get('hotproduct')
+      const { data: res } = await this.$http.get('hot')
       this.allData = res
       this.updateData()
     },
@@ -105,11 +107,11 @@ export default {
       this.titleFontSize = this.$refs.hot_ref.offsetWidth / 100 * 3
       const adapterOption = {
         title: {
-          textStyle: { fontSize: this.titleFontSize }
+          textStyle: { fontSize: this.titleFontSize / 1.25 }
         },
         series: [
           {
-            redius: this.titleFontSize * 4.5
+            radius: this.titleFontSize * 5
           }
         ],
         legend: {

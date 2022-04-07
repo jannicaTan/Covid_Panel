@@ -8,33 +8,51 @@
     </header>
     <div class="screen-body">
       <div class="screen-left column">
-        <div id="left-top">
+        <div id="left-top"  :class="[fullScreenStatus.trend ? 'fullscreen' : '']">
           <!-- 销量趋势图表 -->
-          <TrendLine></TrendLine>
+          <TrendLine ref='trend'></TrendLine>
+          <div class="resize">
+            <span class='el-icon-full-screen' @click="changeSize('trend')"></span>
+          </div>
         </div>
-        <div id="left-bottom">
+        <div id="left-bottom" :class="[fullScreenStatus.seller ? 'fullscreen' : '']">
           <!-- 商家销售金额图表 -->
-          <SellerBar></SellerBar>
+          <SellerBar ref='seller'></SellerBar>
+          <div class="resize">
+            <span class='el-icon-full-screen' @click="changeSize('seller')"></span>
+          </div>
         </div>
       </div>
       <div class="screen-mid column">
-        <div id="middle-top">
+        <div id="middle-top" :class="[fullScreenStatus.rank ? 'fullscreen' : '']">
           <!-- 地区销量排行图表 -->
-          <RankLine></RankLine>
+          <RankLine ref='rank'></RankLine>
+          <div class="resize">
+            <span class='el-icon-full-screen' @click="changeSize('rank')"></span>
+          </div>
         </div>
-        <div id="middle-bottom">
+        <div id="middle-bottom" :class="[fullScreenStatus.map ? 'fullscreen' : '']">
           <!-- 商家分布图表 -->
-          <MapChina></MapChina>
+          <MapChina ref='map'></MapChina>
+          <div class="resize">
+            <span class='el-icon-full-screen' @click="changeSize('map')"></span>
+          </div>
         </div>
       </div>
       <div class="screen-right column">
-        <div id="right-top">
+        <div id="right-top" :class="[fullScreenStatus.hot ? 'fullscreen' : '']">
           <!-- 热销商品占比图表 -->
-          <HotPie></HotPie>
+          <HotPie ref='hot'></HotPie>
+          <div class="resize">
+            <span class='el-icon-full-screen' @click="changeSize('hot')"></span>
+          </div>
         </div>
-        <div id="right-bottom">
+        <div id="right-bottom" :class="[fullScreenStatus.stock ? 'fullscreen' : '']">
           <!-- 库存销量分析图表 -->
-          <StockPie></StockPie>
+          <StockPie ref='stock'></StockPie>
+          <div class="resize">
+            <span class='el-icon-full-screen' @click="changeSize('stock')"></span>
+          </div>
         </div>
       </div>
     </div>
@@ -57,7 +75,8 @@ export default {
       date: null,
       hour: null,
       min: null,
-      sec: null
+      sec: null,
+      fullScreenStatus: { trend: false, seller: false, map: false, rank: false, hot: false, stock: false }
     }
   },
   components: {
@@ -78,6 +97,8 @@ export default {
       this.min = dt.getMinutes()
       this.sec = dt.getSeconds()
     }, 1000)
+    // 注册全屏的回调函数
+    this.$socket.registerCallBack('fullScreen', this.recvData)
   },
   computed: {
     newTime: function () {
@@ -88,8 +109,39 @@ export default {
   beforeDestroy () {
     clearInterval(interval)
   },
+  // 消除获取数据的回调函数
+  destroyed () {
+    this.$socket.unRegisterCallBack('fullScreen')
+  },
   methods: {
-
+    changeSize (chartName) {
+      // 先得到目标状态
+      const targetValue = !this.fullScreenStatus[chartName]
+      // // 设全部为非全屏
+      // Object.keys(this.fullScreenStatus).forEach(item => {
+      //   this.fullScreenStatus[item] = false
+      // })
+      // // 设独立为全屏
+      // this.fullScreenStatus[chartName] = targetValue
+      // // 设置个延迟
+      // this.$nextTick(() => {
+      //   this.$refs[chartName].screenAdapter()
+      // })
+      this.$socket.send({
+        action: 'fullScreen',
+        socketType: 'fullScreen',
+        chartName: chartName,
+        value: targetValue
+      })
+    },
+    recvData (data) {
+      // 设全部为非全屏
+      Object.keys(this.fullScreenStatus).forEach(item => {
+        this.fullScreenStatus[item] = false
+      })
+      // 设独立为全屏
+      this.fullScreenStatus[data.chartName] = data.targetValue
+    }
   }
 }
 </script>
@@ -131,24 +183,45 @@ header {
         font-size: .25rem;
     }
 }
+// flex布局
 .screen-body{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  .column {
-    flex: 3;
-    margin:.25rem .125rem
+  height:100%;
+  overflow: hidden;
+  display:flex;
+  flex:1;
+  .screen-mid{
+    flex:1;
+    max-width: 50%;
+    min-width: 40%;
+    margin:0 .25rem
   }
-  .column:nth-child(2) {
-    flex: 4;
-    overflow: hidden;
-    }
+  .screen-left,.screen-right{
+    flex:1;
+    min-width:10%;
+  }
 }
-#left-top { height: 40%; }
-#left-bottom { height: 40%;margin-top:.25rem}
-#middle-top {width: 100%;height: 40%; }
-#middle-bottom {width: 100%;height: 50%; }
-#right-top {height: 40%; }
-#right-bottom {height: 50%; margin-top:.25rem}
+#left-top { height: 40%; position: relative;}
+#left-bottom {height: 45%;margin-top:.25rem;position: relative;}
+#middle-top {width: 100%;height: 30%; position: relative;}
+#middle-bottom {width: 100%;height: 50%; margin-top:.25rem;position: relative;}
+#right-top {height: 40%; position: relative;}
+#right-bottom {height: 50%; margin-top:.25rem;position: relative;}
+
+.resize {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer; }
+// 缩放样式
+.fullscreen {
+  position: fixed!important;
+  background: url(../../public/static/img/bg.jpg) no-repeat;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  z-index: 100;
+}
 
 </style>

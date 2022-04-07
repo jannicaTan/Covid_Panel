@@ -32,8 +32,8 @@ body,
 // 修改了element的标题下拉选择在这里的全局样式
 .title {
   position: absolute;
-  left: 20px;
-  top: 20px;
+  left: .25rem;
+  top: .125rem;
   z-index: 10;
 
   .el-select {
@@ -43,7 +43,7 @@ body,
     .el-input {
       .el-input__inner {
         border: 0;
-        font-size: 4vh;
+        font-size: .25rem;
         background-color: transparent;
         color: #fff
       }
@@ -58,13 +58,11 @@ body,
     .el-select-dropdown {
       border: 0;
       background-color: transparent !important;
-      color: #fff !important;
     }
 
     .el-scrollbar__wrap,
     .el-select-dropdown__list {
       background-color: #0b1a37;
-      color: #fff !important;
     }
 
     // 鼠标选择色
@@ -79,4 +77,9 @@ body,
       display: none
     }
   }
+}
+
+[class*=" el-icon-"],
+[class^=el-icon-] {
+  color: #fff !important;
 }

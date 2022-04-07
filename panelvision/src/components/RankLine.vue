@@ -130,7 +130,7 @@ export default {
         this.startValue++
         this.endValue++
         this.updateData()
-      }, 3000)
+      }, 2000)
     },
     screenAdapter () {
       const titleFontSize = this.$refs.rank_ref.offsetWidth / 100 * 3.6

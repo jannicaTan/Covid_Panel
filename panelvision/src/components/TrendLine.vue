@@ -1,7 +1,7 @@
 <template>
   <div class="com-container">
     <div class="title">
-      <el-select v-model="dataType" placeholder="请选择" :popper-append-to-body="false" >
+      <el-select v-model="dataType" placeholder="请选择" :popper-append-to-body="false">
         <el-option v-for="item in options" :key="item.key" :label="item.text" :value="item.key">
         </el-option>
       </el-select>
@@ -18,7 +18,8 @@ export default {
       chartInstance: null,
       allData: null,
       dataType: 'map',
-      options: null
+      options: null,
+      titleFontSize: 0
     }
   },
   // created中注册回调函数
@@ -141,7 +142,17 @@ export default {
       // console.log(this.allData)
     },
     screenAdapter () {
-      const adapterOption = {}
+      this.titleFontSize = this.$refs.trend_ref.offsetWidth / 100 * 3.6
+      const adapterOption = {
+        legend: {
+          itemWidth: this.titleFontSize,
+          itemHeight: this.titleFontSize,
+          itemGap: this.titleFontSize,
+          textStyle: { fontSize: this.titleFontSize / 2 }
+
+        }
+
+      }
       this.chartInstance.setOption(adapterOption)
       this.chartInstance.resize()
     }

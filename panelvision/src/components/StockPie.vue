@@ -141,7 +141,7 @@ export default {
       const showData = this.allData.slice(start, end)
 
       this.titleFontSize = this.$refs.stork_ref.offsetWidth / 100 * 3
-      const innerRadius = this.titleFontSize * 2
+      const innerRadius = this.titleFontSize * 3
       const outRadius = innerRadius * 1.125
 
       const seriesArr = showData.map((item, index) => {
@@ -149,7 +149,7 @@ export default {
           // radius 环形图[内半径，外半径]
           radius: [innerRadius, outRadius],
           label: {
-            fontSize: this.titleFontSize / 2
+            fontSize: this.titleFontSize / 1.2
           }
         }
       })
