@@ -19,9 +19,17 @@ export default {
       timeId: null
     }
   },
+  created () {
+    this.$socket.registerCallBack('sellerData', this.getData)
+  },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData() 先将getData的调用注释起来
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'sellerData',
+      chartName: 'seller'
+    })
     window.addEventListener('resize', this.screenAdapter)
     // 在界面姐在完成时进行适配屏幕
     this.screenAdapter()
@@ -30,6 +38,7 @@ export default {
     clearInterval(this.timerId)
     // 在组件销毁的时候, 需要将监听器取消掉
     window.removeEventListener('resize', this.screenAdapter)
+    this.$socket.unRegisterCallBack('sellerData')
   },
   methods: {
     // 1.初始化图表

@@ -18,15 +18,24 @@ export default {
       end: (this.currentIndex + 1) * 5
     }
   },
+  created () {
+    this.$socket.registerCallBack('stockData', this.getData)
+  },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData() 先将getData的调用注释起来
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'stockData',
+      chartName: 'stock'
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed () {
     window.removeEventListener('resize', this.screenAdapter)
     clearInterval(this.timerId)
+    this.$socket.unRegisterCallBack('stockData')
   },
   methods: {
     initChart () {

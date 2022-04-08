@@ -15,15 +15,24 @@ export default {
       timerId: 0
     }
   },
+  created () {
+    this.$socket.registerCallBack('rankData', this.getData)
+  },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'rankData',
+      chartName: 'rank'
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed () {
     window.removeEventListener('resize', this.screenAdapter)
     clearInterval(this.timerId)
+    this.$socket.unRegisterCallBack('rankData')
   },
   methods: {
     initChart () {

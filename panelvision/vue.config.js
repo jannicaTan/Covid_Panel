@@ -7,6 +7,7 @@
 // 如果想覆盖Webpack中的默认配置,需要在项目的根路径下增加vue.config.js文件
 module.exports = {
   lintOnSave: false,
+  publicPath: './',
   devServer: {
     host: 'localhost',
     // host: '0.0.0.0',
@@ -14,4 +15,6 @@ module.exports = {
     port: 8999, // 端口号的配置
     open: true // 自动打开浏览器
   }
+  // eslint-disable-next-line no-constant-condition
+
 }

@@ -14,14 +14,23 @@ export default {
       allData: null
     }
   },
+  created () {
+    this.$socket.registerCallBack('mapData', this.getData)
+  },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData()
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'mapData',
+      chartName: 'map'
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed () {
     window.removeEventListener('resize', this.screenAdapter)
+    this.$socket.unRegisterCallBack('mapData')
   },
   methods: {
     async initChart () {

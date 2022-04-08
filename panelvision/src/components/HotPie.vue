@@ -33,14 +33,23 @@ export default {
       }
     }
   },
+  created () {
+    this.$socket.registerCallBack('hotData', this.getData)
+  },
   mounted () {
     this.initChart()
-    this.getData()
+    // this.getData() 先将getData的调用注释起来
+    this.$socket.send({
+      action: 'getData',
+      socketType: 'hotData',
+      chartName: 'hotproduct'
+    })
     window.addEventListener('resize', this.screenAdapter)
     this.screenAdapter()
   },
   destroyed () {
     window.removeEventListener('resize', this.screenAdapter)
+    this.$socket.unRegisterCallBack('hotData')
   },
   methods: {
     initChart () {
@@ -76,7 +85,7 @@ export default {
       this.chartInstance.setOption(initOption)
     },
     async getData () {
-      const { data: res } = await this.$http.get('hot')
+      const { data: res } = await this.$http.get('hotproduct')
       this.allData = res
       this.updateData()
     },

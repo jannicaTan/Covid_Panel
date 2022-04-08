@@ -139,8 +139,13 @@ export default {
       Object.keys(this.fullScreenStatus).forEach(item => {
         this.fullScreenStatus[item] = false
       })
-      // 设独立为全屏
-      this.fullScreenStatus[data.chartName] = data.targetValue
+      // 将目标图表设置为目标状态
+      this.fullScreenStatus[data.chartName] = data.value
+      Object.keys(this.fullScreenStatus).forEach(item => {
+        this.$nextTick(() => {
+          this.$refs[item].screenAdapter()
+        })
+      })
     }
   }
 }

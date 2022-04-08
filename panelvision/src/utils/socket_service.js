@@ -38,9 +38,10 @@ export default class SocketService {
       }, 500 * this.connectRetryCount)
     }
     this.ws.onmessage = msg => {
-      console.log('WebSocket 接收到数据')
       // msg为接受的数据
-      const recvData = JSON.parse(msg.data)
+      // 这里第二次全屏点击的时候msg.data传的是obj类型，因此多一个判断省的报错
+      const recvData = typeof msg.data === 'string' ? JSON.parse(msg.data) : msg.data
+      // const recvData = JSON.parse(msg.data)
       const socketType = recvData.socketType
       // 判断回调函数是否存在
       if (this.callBackMapping[socketType]) {
@@ -49,6 +50,7 @@ export default class SocketService {
           const realData = JSON.parse(recvData.data)
           this.callBackMapping[socketType].call(this, realData)
         } else if (action === 'fullScreen') {
+          console.log(recvData)
           this.callBackMapping[socketType].call(this, recvData)
         } else if (action === 'themeChange') {
           this.callBackMapping[socketType].call(this, recvData)
