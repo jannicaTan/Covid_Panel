@@ -9,7 +9,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 import SocketService from './utils/socket_service'
 import axios from 'axios'
 // 设置axios的baseURL
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/'
+axios.defaults.baseURL = 'http://8.140.113.169:9998/api/'
+// axios.defaults.baseURL = 'http://127.0.0.1:9998/api/'
 // 将axios挂载到Vue的原型对象上,在别的组件中使用：this.$http
 Vue.prototype.$http = axios
 

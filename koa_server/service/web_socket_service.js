@@ -1,13 +1,16 @@
 // import { WebSocketServer } from 'ws';
 const path = require('path')
 const fileUtils = require('../utils/file_utils')
-const WebSocket = require('ws')
-// 创建WebSocket服务端的对象, 绑定的端口号是9998
-const wss = new WebSocket.Server({
-  port: 9998
-})
+// const WebSocket = require('ws')
+
+// // 创建WebSocket服务端的对象, 绑定的端口号是9998
+// const wss = new WebSocket.Server({
+//   port: 9998
+// })
+
 // 服务端开启了监听
-module.exports.listen = () => {
+// module.exports.listen = () => {
+  module.exports= wss => {
   // 对客户端的连接事件进行监听
   // client:代表的是客户端的连接socket对象
   wss.on('connection', client => {
